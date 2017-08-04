@@ -1,0 +1,13 @@
+# bin folder
+bin/
+
+# build folder
+build/
+
+# .gradle folder
+.gradle/
+
+# swp file
+.*.swp
+
+workbench.xmi
