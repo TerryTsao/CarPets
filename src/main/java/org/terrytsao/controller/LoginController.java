@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terrytsao.model.User;
 import org.terrytsao.service.UserService;
+import org.terrytsao.tool.PasswordTool;
 
 @Controller
 public class LoginController {
@@ -39,49 +40,56 @@ public class LoginController {
 	}
 
 	@RequestMapping("/signup")
-	public ModelAndView signup() {
-		return new ModelAndView("signup");
+	public ModelAndView signup(@ModelAttribute("userName") String name) {
+		ModelAndView mv = new ModelAndView("signup");
+		if (name != null) {
+			mv.addObject("userName", name);
+		}
+		return mv;
     }
 
 	@RequestMapping(value="/signupProcess", method=RequestMethod.POST)
 	public String process(@RequestParam Map<String, String> params,
 			RedirectAttributes ra) {
-		if (true) {
-			// check if two passwords matches
-			String passwd = params.get("password");
+		String userName = params.get("userName");
+		String passwd = params.get("password");
 			String passwd1 = params.get("password1");
-
+		if (isUserNameDup(userName)) { // dup username
+			ra.addAttribute("userName", userName);
+			return "redirect:/signup";
+		}
+		else{
+			// check if two passwords matches
 			if (null == passwd || null == passwd1) {
 				throw new NullPointerException("Either password is null");
 			}
 
-			if (!passwd.equals(passwd1) || passwd.length() < 3) { // password inputs mismatch
-				ra.addAttribute("username", params.get("username"));
+			if (!passwd.equals(passwd1) || passwd.length() < 6) { // password
+																	// inputs
+																	// mismatch
+				ra.addAttribute("userName", userName);
 				return "redirect:/signup";
 			}
 			else { // all input passes
-				// TODO: process and store to database
-				User user = new User();
-                user.setUid(17);
-				user.setUserName(params.get("username"));
-				user.setPassword(passwd);
+					// encrypt password
+				String hashedPW = PasswordTool.hashpw(passwd);
 
-                /*
-				SessionFactory sf = new Configuration().configure()
-						.buildSessionFactory();
-				Session sss = sf.openSession();
-				Transaction tx = sss.beginTransaction();
-				sss.save(user);
-				tx.commit();
-				sss.close();
-                */
+				User user = new User();
+				user.setUserName(userName);
+				user.setPassword(hashedPW);
+
                 userService.addUser(user);
 
-				ra.addFlashAttribute("username", params.get("username"));
+				ra.addFlashAttribute("username", userName);
 				return "redirect:/homepage";
 			}
 		}
-		return null;
+	}
 
+	/**
+	 * Check if userName is already in the db.
+	 */
+	private boolean isUserNameDup(String userName) {
+		return userService.getUser(userName) != null;
 	}
 }
