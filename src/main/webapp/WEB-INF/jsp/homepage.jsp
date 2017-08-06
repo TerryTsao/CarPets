@@ -5,6 +5,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-    Hello, ${username}
+    Hello, ${userName}
 </body>
 </html>

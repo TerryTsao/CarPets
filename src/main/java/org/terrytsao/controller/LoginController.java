@@ -26,18 +26,41 @@ public class LoginController {
 	}
 
 	@RequestMapping("/homepage")
-	public ModelAndView home(@ModelAttribute("username") String name) {
+	public ModelAndView home(@ModelAttribute("userName") String name) {
 		ModelAndView mv = new ModelAndView("homepage");
 
-		mv.addObject("username", name);
+		mv.addObject("userName", name);
 
 		return mv;
 	}
 
 	@RequestMapping("/login")
-	public ModelAndView login() {
-		return new ModelAndView("login");
+	public ModelAndView login(@ModelAttribute("userName") String name) {
+		ModelAndView mv = new ModelAndView("login");
+		if (name != null) {
+			mv.addObject("userName", name);
+		}
+		return mv;
 	}
+
+	@RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
+	public String loginProcess(@RequestParam Map<String, String> params,
+            RedirectAttributes ra) {
+    	
+		String userName = params.get("userName");
+		String passwd = params.get("password");
+		User user = userService.getUser(userName);
+		if (user == null) {
+			ra.addAttribute("userName", userName);
+			return "redirect:/login"; // user does not exist
+		}
+		if (!PasswordTool.checkpw(passwd, user.getPassword())) {
+			ra.addAttribute("userName", userName);
+			return "redirect:/login"; // wrong password
+		}
+		ra.addAttribute("userName", userName);
+		return "redirect:/homepage";
+    }
 
 	@RequestMapping("/signup")
 	public ModelAndView signup(@ModelAttribute("userName") String name) {
@@ -49,11 +72,11 @@ public class LoginController {
     }
 
 	@RequestMapping(value="/signupProcess", method=RequestMethod.POST)
-	public String process(@RequestParam Map<String, String> params,
+	public String signupPprocess(@RequestParam Map<String, String> params,
 			RedirectAttributes ra) {
 		String userName = params.get("userName");
 		String passwd = params.get("password");
-			String passwd1 = params.get("password1");
+		String passwd1 = params.get("password1");
 		if (isUserNameDup(userName)) { // dup username
 			ra.addAttribute("userName", userName);
 			return "redirect:/signup";
