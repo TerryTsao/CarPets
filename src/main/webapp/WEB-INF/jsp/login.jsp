@@ -7,16 +7,8 @@
     <link rel="stylesheet" href="${root}/resources/css/login.css" />
 </head>
 <body>
-	<div id="titlePanel">
-		<div id="title">
-			<h1 class="title is-1">Petdoc</h1>
-		</div>
-		<div id="icon">
-			<figure class="image is-64x64">
-				<img src="${root}/resources/image/paw_icon.png"
-						width="64" height="64" />
-			</figure> 
-		</div>
+	<div>
+		<img id="title" src="${root}/resources/image/title.png" />
 	</div>
 
 	<div class="box" id="panel">
@@ -24,16 +16,32 @@
 			<img src="https://c1.staticflickr.com/8/7157/6733769739_54e6c82b2a_b.jpg" />
 		</div>
 
-		<div id="login">
+		<div id="login" class="box">
+			<h3 class="title">Log in</h3> <br/>
 			<form method="post" action="loginProcess">
-				Log in<br/>
+				<div class="field">
+					<label class="label">Username</label>
+					<div class="control">
+						<input class="input" name="userName" value="${userName}"
+								placeholder="Username" />
+					</div>
+				</div> 
 
-				Username <input name="userName" value="${userName}" /> <br/>
-				Password <input name="password" type="password" /> <br/> <br/>
+				<div class="field">
+					<label class="label">Password</label>
+					<div class="control">
+						 <input class="input" name="password" 
+						        type="password" placeholder="Password" />
+					</div>
+				</div>
 
-				<button class="button is-primary" type="submit">Login</button>
+				<div class="field" id="buttonDiv">
+				    <div class="control">
+						<button class="button is-primary" type="submit">Login</button>
+				    </div>
+				</div>
 			</form>
-		</div> 
+		</div>
 	</div>
     
 </body>
