@@ -20,24 +20,59 @@
                 <div class="field">
                     <label class="label">Username</label>
                     <div class="control has-icons_left">
-                        <input class="input" name="userName" value="${userName}"
+                        <input class="input
+                        
+                          <c:if test="${userNameIsEmpty != null || 
+                             userNameIsDup != null}">
+                            is-danger
+                          </c:if>
+                        
+                        " name="userName" value="${userName}"
                                 placeholder="Username" />
+                        <c:if test="${userNameIsEmpty != null}">
+                          <p class="help is-danger">Required</p>
+                        </c:if>
+                        <c:if test="${userNameIsDup != null}">
+                          <p class="help is-danger">Username already exists</p>
+                        </c:if>
                     </div>
                 </div> 
 
                 <div class="field">
                     <label class="label">Password</label>
                     <div class="control has-icons_left">
-                         <input class="input" name="password" 
+                         <input class="input
+                         
+                          <c:if test="${passwordIsEmpty != null || 
+                             passwordNotMatch != null || shortPassword}">
+                            is-danger
+                          </c:if>
+                         " name="password" 
                                 type="password" placeholder="Password" />
+                         <c:if test="${passwordIsEmpty != null}">
+                          <p class="help is-danger">Required</p>
+                        </c:if>
+                        <c:if test="${passwordNotMatch != null}">
+                          <p class="help is-danger">Passwords do not match</p>
+                        </c:if> 
+                        <c:if test="${shortPassword != null}">
+                          <p class="help is-danger">Password should be at least 6 characters</p>
+                        </c:if>
                     </div>
                 </div>
                 
                 <div class="field">
                     <label class="label">Reenter Password</label>
                     <div class="control has-icons_left">
-                         <input class="input" name="password1" 
+                         <input class="input
+                         <c:if test="${password1IsEmpty != null }">
+                            is-danger
+                          </c:if>
+                         " name="password1" 
                                 type="password" placeholder="Reenter Password" />
+                         <c:if test="${password1IsEmpty != null}">
+                          <p class="help is-danger">Required</p>
+                        </c:if>
                     </div>
                 </div>
 

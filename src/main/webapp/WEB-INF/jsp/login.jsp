@@ -63,7 +63,7 @@
 				<div class="field" id="buttonDiv">
 				    <div class="control">
 						<input class="button is-primary" type="submit"
-						      value="Login" />
+						      value="Log in" />
 				    </div>
 				    <div class="control" id="signUp">
 				        Not a member yet? &nbsp; <a href="signup"> Sign up</a>  now!
