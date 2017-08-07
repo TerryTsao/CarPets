@@ -7,9 +7,7 @@
     <link rel="stylesheet" href="${root}/resources/css/login.css" />
 </head>
 <body>
-	<div>
-		<img id="title" src="${root}/resources/image/title.png" />
-	</div>
+    <t:title root="${root}"></t:title>
 
 	<div class="box" id="panel">
 		<div id="image">
@@ -22,22 +20,50 @@
 				<div class="field">
 					<label class="label">Username</label>
 					<div class="control has-icons_left">
-						<input class="input" name="userName" value="${userName}"
+						<input class="input
+						
+						  <c:if test="${userNameIsEmpty != null || 
+						     userNameNotExist != null}">
+						    is-danger
+						  </c:if>
+						
+						" name="userName" value="${userName}"
 								placeholder="Username" />
+						<c:if test="${userNameIsEmpty != null}">
+						  <p class="help is-danger">Required</p>
+						</c:if>
+						<c:if test="${userNameNotExist != null}">
+                          <p class="help is-danger">Username does not exist</p>
+                        </c:if>
 					</div>
 				</div> 
 
 				<div class="field">
 					<label class="label">Password</label>
 					<div class="control has-icons_left">
-						 <input class="input" name="password" 
+						 <input class="input
+						 
+						   <c:if test="${passwordIsEmpty != null || 
+                             wrongPassword != null}">
+                            is-danger
+                           </c:if>
+						 
+						 " name="password" 
 						        type="password" placeholder="Password" />
+						  
+						<c:if test="${passwordIsEmpty != null}">
+                          <p class="help is-danger">Required</p>
+                        </c:if>
+                        <c:if test="${wrongPassword != null}">
+                          <p class="help is-danger">Password is incorrect</p>
+                        </c:if>
 					</div>
 				</div>
 				
 				<div class="field" id="buttonDiv">
 				    <div class="control">
-						<button class="button is-primary is-large" type="submit">Login</button>
+						<input class="button is-primary" type="submit"
+						      value="Login" />
 				    </div>
 				    <div class="control" id="signUp">
 				        Not a member yet? &nbsp; <a href="signup"> Sign up</a>  now!
@@ -46,6 +72,5 @@
 			</form>
 		</div>
 	</div>
-    
 </body>
 </html>

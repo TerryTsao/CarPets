@@ -43,7 +43,7 @@
 
 				<div class="field is-grouped">
 				  <div class="control">
-					<button class="button is-primary" type="submit">Sign up</button>
+					<input class="button is-primary" type="submit" value="Sign up" />
 				  </div>
 				  <div class="control">
 				    <a href="${root}">
