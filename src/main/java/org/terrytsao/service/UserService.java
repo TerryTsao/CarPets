@@ -2,9 +2,7 @@ package org.terrytsao.service;
 
 import org.terrytsao.model.User;
 
-public interface UserService {
-
-    public void addUser(User user);
+public interface UserService extends Service<User> {
 
 	public User getUser(String userName);
 }

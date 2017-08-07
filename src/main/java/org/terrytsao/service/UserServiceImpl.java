@@ -8,16 +8,10 @@ import org.terrytsao.model.User;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<User> implements UserService {
 
-    @Autowired
-    private UserDAO userDAO;
-
-    @Override
-    @Transactional
-    public void addUser(User user) {
-        userDAO.addUser(user);
-    }
+	@Autowired
+	private UserDAO userDAO;
 
 	@Override
 	public User getUser(String userName) {

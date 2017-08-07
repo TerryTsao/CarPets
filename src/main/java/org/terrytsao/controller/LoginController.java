@@ -139,7 +139,7 @@ public class LoginController {
 		user.setUserName(userName);
 		user.setPassword(hashedPW);
 
-		userService.addUser(user);
+		userService.add(user);
 
 		ra.addFlashAttribute("userName", userName);
 		return "redirect:/homepage";
