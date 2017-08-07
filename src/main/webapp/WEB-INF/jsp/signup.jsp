@@ -19,7 +19,7 @@
             <form method="post" action="signupProcess">
                 <div class="field">
                     <label class="label">Username</label>
-                    <div class="control has-icons_left">
+                    <div class="control has-icons-left">
                         <input class="input
                         
                           <c:if test="${userNameIsEmpty != null || 
@@ -35,12 +35,15 @@
                         <c:if test="${userNameIsDup != null}">
                           <p class="help is-danger">Username already exists</p>
                         </c:if>
+                        <span class="icon is-small is-left">
+							  <i class="fa fa-user"></i>
+						</span>
                     </div>
                 </div> 
 
                 <div class="field">
                     <label class="label">Password</label>
-                    <div class="control has-icons_left">
+                    <div class="control has-icons-left">
                          <input class="input
                          
                           <c:if test="${passwordIsEmpty != null || 
@@ -58,12 +61,16 @@
                         <c:if test="${shortPassword != null}">
                           <p class="help is-danger">Password should be at least 6 characters</p>
                         </c:if>
+
+                        <span class="icon is-small is-left">
+							  <i class="fa fa-lock"></i>
+						</span>
                     </div>
                 </div>
                 
                 <div class="field">
                     <label class="label">Reenter Password</label>
-                    <div class="control has-icons_left">
+                    <div class="control has-icons-left">
                          <input class="input
                          <c:if test="${password1IsEmpty != null }">
                             is-danger
@@ -73,6 +80,9 @@
                          <c:if test="${password1IsEmpty != null}">
                           <p class="help is-danger">Required</p>
                         </c:if>
+                        <span class="icon is-small is-left">
+							  <i class="fa fa-lock"></i>
+						</span>
                     </div>
                 </div>
 

@@ -19,7 +19,7 @@
 			<form method="post" action="loginProcess">
 				<div class="field">
 					<label class="label">Username</label>
-					<div class="control has-icons_left">
+					<div class="control has-icons-left">
 						<input class="input
 						
 						  <c:if test="${userNameIsEmpty != null || 
@@ -35,12 +35,15 @@
 						<c:if test="${userNameNotExist != null}">
                           <p class="help is-danger">Username does not exist</p>
                         </c:if>
+                        <span class="icon is-small is-left">
+							  <i class="fa fa-user"></i>
+						</span>
 					</div>
 				</div> 
 
 				<div class="field">
 					<label class="label">Password</label>
-					<div class="control has-icons_left">
+					<div class="control has-icons-left">
 						 <input class="input
 						 
 						   <c:if test="${passwordIsEmpty != null || 
@@ -57,6 +60,11 @@
                         <c:if test="${wrongPassword != null}">
                           <p class="help is-danger">Password is incorrect</p>
                         </c:if>
+
+                        <span class="icon is-small is-left">
+							  <i class="fa fa-lock"></i>
+						</span>
+
 					</div>
 				</div>
 				
