@@ -17,11 +17,11 @@
 		</div>
 
 		<div id="login" class="box">
-			<h3 class="title">Log in</h3> <br/>
+			<h3 class="title is-3">Log in</h3>
 			<form method="post" action="loginProcess">
 				<div class="field">
 					<label class="label">Username</label>
-					<div class="control">
+					<div class="control has-icons_left">
 						<input class="input" name="userName" value="${userName}"
 								placeholder="Username" />
 					</div>
@@ -29,15 +29,18 @@
 
 				<div class="field">
 					<label class="label">Password</label>
-					<div class="control">
+					<div class="control has-icons_left">
 						 <input class="input" name="password" 
 						        type="password" placeholder="Password" />
 					</div>
 				</div>
-
+				
 				<div class="field" id="buttonDiv">
 				    <div class="control">
-						<button class="button is-primary" type="submit">Login</button>
+						<button class="button is-primary is-large" type="submit">Login</button>
+				    </div>
+				    <div class="control" id="signUp">
+				        Not a member yet? &nbsp; <a href="signup"> Sign up</a>  now!
 				    </div>
 				</div>
 			</form>

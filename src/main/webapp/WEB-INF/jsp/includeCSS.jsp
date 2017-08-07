@@ -2,3 +2,4 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="${root}/resources/css/font-awesome.min.css" />
 	<link rel="stylesheet" href="${root}/resources/css/bulma.min.css" />
+	<link rel="shortcut icon" href="http://bulma.io/favicons/favicon.ico?v=201701041855" />
