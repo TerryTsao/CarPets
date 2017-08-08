@@ -1,10 +1,15 @@
 package org.terrytsao.service;
 
+import java.io.Serializable;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.terrytsao.dao.DAO;
 
-public class ServiceImpl<T> implements Service<T> {
+@Service
+@Transactional
+public class MyServiceImpl<T> implements MyService<T> {
 
 	@Autowired
 	protected DAO<T> dao;
@@ -15,4 +20,8 @@ public class ServiceImpl<T> implements Service<T> {
 		dao.add(t);
 	}
 
+	@Override
+	public T getById(Serializable id) {
+		return dao.getById(id);
+	}
 }

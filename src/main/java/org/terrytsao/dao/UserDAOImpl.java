@@ -7,6 +7,10 @@ import org.terrytsao.model.User;
 @Repository
 public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
 
+	public UserDAOImpl() {
+		setClass(User.class);
+	}
+
 	@Override
 	public User getUser(String userName) {
 		Query<User> query = sessionFactory.getCurrentSession()
