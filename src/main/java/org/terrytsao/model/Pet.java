@@ -37,9 +37,10 @@ public class Pet implements Serializable {
 	@Column(nullable = false)
 	private petGender gender;
 
-	private long microchipNO;
+	@Column
+	private String microchipNO;
 	private String breed;
-	private String vet;
+	private byte[] image;
 	public int getPid() {
 		return pid;
 	}
@@ -82,10 +83,10 @@ public class Pet implements Serializable {
 	public void setGender(petGender gender) {
 		this.gender = gender;
 	}
-	public long getMicrochipNO() {
+	public String getMicrochipNO() {
 		return microchipNO;
 	}
-	public void setMicrochipNO(long microchipNO) {
+	public void setMicrochipNO(String microchipNO) {
 		this.microchipNO = microchipNO;
 	}
 	public String getBreed() {
@@ -94,14 +95,14 @@ public class Pet implements Serializable {
 	public void setBreed(String breed) {
 		this.breed = breed;
 	}
-	public String getVet() {
-		return vet;
-	}
-	public void setVet(String vet) {
-		this.vet = vet;
-	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public byte[] getImage() {
+		return image;
+	}
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 }

@@ -12,19 +12,19 @@
 		<div id="login" class="box">
 			<h3 class="title is-3">Add a pet</h3>
 			<form method="post" action="addPetProcess">
+				<div class="field is-grouped">
 				<div class="field">
 					<label class="label">Pet Name</label>
 					<div class="control">
-						<input class="input" name="petName" value="${petName}"
+						<input class="input 
+						<c:if test="${petNameIsEmpty != null}">
+                            is-danger
+                        </c:if>"
+						name="petName" value="${petName}"
 								placeholder="Pet Name" />
-					</div>
-				</div> 
-
-				<div class="field">
-					<label class="label">Species</label>
-					<div class="control">
-						<input class="input" name="species" value="${species}"
-								placeholder="Species" />
+						<c:if test="${petNameIsEmpty != null}">
+                          <p class="help is-danger">Required</p>
+                        </c:if>
 					</div>
 				</div> 
 
@@ -32,7 +32,25 @@
 					<label class="label">Owner Name</label>
 					<div class="control">
 						<input class="input" name="ownerName" value="${ownerName}"
-								placeholder="Owner Name" />
+								placeholder="Owner name" />
+					</div>
+				</div> 
+				</div> 
+
+				<div class="field">
+					<label class="label">Species</label>
+					<div class="control">
+						<label class="radio">
+                          <input type="radio" name="species" value="Dog" />
+                          Dog
+                        </label>
+                        <label class="radio">
+                          <input type="radio" name="species" value="Cat" />
+                          Cat
+                        </label>
+                        <c:if test="${genderIsEmpty != null}">
+                          <p class="help is-danger">Required</p>
+                        </c:if>
 					</div>
 				</div> 
 											
@@ -55,14 +73,24 @@
 						  <input type="radio" name="gender" value="NEUTERED" />
 						  Neutered
 						</label>
+                        <c:if test="${genderIsEmpty != null}">
+                          <p class="help is-danger">Required</p>
+                        </c:if>
 				  </div>
 				</div>
 				
 				<div class="field">
 					<label class="label">Date of Birth</label>
 					<div class="control">
-						<input class="input" name="DOB" value="${DOB}"
-								placeholder="DOB" />
+						<input class="input
+						 <c:if test="${DOBIsEmpty != null }">
+                            is-danger
+                         </c:if>
+						" name="DOB" value="${DOB}"
+								placeholder="DOB" /> 
+						 <c:if test="${DOBIsEmpty != null}">
+                          <p class="help is-danger">Required</p>
+                        </c:if>
 					</div>
 				</div> 
 
@@ -79,14 +107,6 @@
 					<div class="control">
 						<input class="input" name="breed" value="${breed}"
 								placeholder="Breed" />
-					</div>
-				</div> 
-
-				<div class="field">
-					<label class="label">Vet</label>
-					<div class="control">
-						<input class="input" name="vet" value="${vet}"
-								placeholder="Vet" />
 					</div>
 				</div> 
 
