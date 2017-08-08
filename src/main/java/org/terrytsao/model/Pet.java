@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class PetProfile implements Serializable {
+public class Pet implements Serializable {
 
     private static final long serialVersionUID = 1;
 

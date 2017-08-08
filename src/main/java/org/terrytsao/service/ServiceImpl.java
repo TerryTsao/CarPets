@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.terrytsao.dao.DAO;
 
 public class ServiceImpl<T> implements Service<T> {
+
 	@Autowired
 	protected DAO<T> dao;
 
