@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terrytsao.model.Pet;
 import org.terrytsao.model.Species;
 import org.terrytsao.model.petGender;
-import org.terrytsao.service.MyService;
+import org.terrytsao.service.PetService;
 import org.terrytsao.service.UserService;
 
 @Controller
@@ -23,8 +23,7 @@ public class PetProfileController {
 
 
 	@Autowired
-	// private PetService petService;
-	private MyService<Pet> service;
+	private PetService petService;
 
 	@RequestMapping("/user/addPet")
 	public ModelAndView addPetForm(@RequestParam Map<String, String> params) {
@@ -78,7 +77,7 @@ public class PetProfileController {
 		pet.setOwnerName(ownerName);
 		pet.setUser(userService.getUser("maomao")); // TODO
 		
-		service.add(pet);
+		petService.add(pet);
 		return "redirect:/homepage";
 	}
 }

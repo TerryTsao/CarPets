@@ -8,7 +8,7 @@ import org.terrytsao.model.User;
 
 @Service
 @Transactional
-public class UserServiceImpl extends MyServiceImpl<User> implements UserService {
+public class UserServiceImpl extends MyServiceImpl implements UserService {
 
 	@Autowired
 	private UserDAO userDAO;

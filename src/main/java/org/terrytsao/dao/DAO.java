@@ -2,10 +2,8 @@ package org.terrytsao.dao;
 
 import java.io.Serializable;
 
-public interface DAO<T> {
-	public void add(T t);
+public interface DAO {
+	public <T> void add(T t);
 
-	public T getById(Serializable id);
-
-	public void setClass(Class<T> clazz);
+	public <T> T getById(Class<T> type, Serializable id);
 }

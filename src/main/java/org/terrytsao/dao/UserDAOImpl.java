@@ -5,11 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.terrytsao.model.User;
 
 @Repository
-public class UserDAOImpl extends DAOImpl<User> implements UserDAO {
-
-	public UserDAOImpl() {
-		setClass(User.class);
-	}
+public class UserDAOImpl extends DAOImpl implements UserDAO {
 
 	@Override
 	public User getUser(String userName) {

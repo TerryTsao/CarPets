@@ -2,9 +2,9 @@ package org.terrytsao.service;
 
 import java.io.Serializable;
 
-public interface MyService<T> {
+public interface MyService {
 
-	public void add(T t);
+	public <T> void add(T t);
 
-	public T getById(Serializable id);
+	public <T> T getById(Class<T> type, Serializable id);
 }

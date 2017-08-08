@@ -3,25 +3,27 @@ package org.terrytsao.service;
 import java.io.Serializable;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.terrytsao.dao.DAO;
 
-@Service
+@Service(value = "myService")
 @Transactional
-public class MyServiceImpl<T> implements MyService<T> {
+public class MyServiceImpl implements MyService {
 
 	@Autowired
-	protected DAO<T> dao;
+	@Qualifier("dao")
+	protected DAO dao;
 
 	@Override
 	@Transactional
-	public void add(T t) {
+	public <T> void add(T t) {
 		dao.add(t);
 	}
 
 	@Override
-	public T getById(Serializable id) {
-		return dao.getById(id);
+	public <T> T getById(Class<T> type, Serializable id) {
+		return dao.getById(type, id);
 	}
 }

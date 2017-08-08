@@ -4,22 +4,22 @@ import java.util.Date;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.terrytsao.model.Pet;
 import org.terrytsao.model.Vaccination;
 import org.terrytsao.service.MyService;
-import org.terrytsao.service.PetService;
 
 @Controller
 public class AddVacController {
 	@Autowired
-	private PetService petService;
-	@Autowired
-	private MyService<Vaccination> myService;
+	@Qualifier("myService")
+	private MyService myService;
 
 	@RequestMapping("/user/addVac")
 	public ModelAndView addVacForm(@RequestParam Map<String, String> params) {
@@ -53,7 +53,7 @@ public class AddVacController {
 		vaccination.setVet(vet);
 		// vaccination.setDogvac(DogVac.valueOf(dogvac.toUpperCase()));
 		// vaccination.setCatvac(CatVac.valueOf(catvac.toUpperCase()));
-		vaccination.setPet(petService.getById(1)); // TODO
+		vaccination.setPet(myService.getById(Pet.class, 11)); // TODO
 
 		myService.add(vaccination);
 		return "redirect:/homepage";
