@@ -15,6 +15,7 @@ import org.terrytsao.model.Species;
 import org.terrytsao.model.petGender;
 import org.terrytsao.service.PetService;
 import org.terrytsao.service.UserService;
+import org.terrytsao.tool.DateTool;
 
 @Controller
 public class PetProfileController {
@@ -67,9 +68,15 @@ public class PetProfileController {
 		}
 		if (sthIsEmpty)
 			return "redirect:/user/addPet";
+		Date date = DateTool.isDateFormatted(DOB);
+		if (date == null) {
+			ra.addAttribute("DOBWrongFormat", "true");
+			return "redirect:/user/addPet";
+		}
+
 		Pet pet = new Pet();
 		pet.setPetName(petName);
-		pet.setDOB(new Date()); // TODO
+		pet.setDOB(date);
 		pet.setSpecies(Species.valueOf(species.toUpperCase()));
 		pet.setGender(petGender.valueOf(gender.toUpperCase()));
 		pet.setMicrochipNO(microchipNO);

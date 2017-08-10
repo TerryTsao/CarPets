@@ -5,6 +5,11 @@
 	<%@ include file="/WEB-INF/jsp/includeCSS.jsp" %>
     <title>Insert title here</title>
     <link rel="stylesheet" href="${root}/resources/css/login.css" />
+    <script>
+  $( function() {
+    $( "#datepicker" ).datepicker({changeMonth: true, changeYear: true});
+  } );
+  </script>
 </head>
 <body>
     <t:title root="${root}"></t:title>
@@ -82,14 +87,17 @@
 				<div class="field">
 					<label class="label">Date of Birth</label>
 					<div class="control">
-						<input class="input
-						 <c:if test="${DOBIsEmpty != null }">
+						<input id="datepicker" class="input
+						 <c:if test="${DOBIsEmpty != null || DOBWrongFormat != null}">
                             is-danger
                          </c:if>
 						" name="DOB" value="${DOB}"
-								placeholder="DOB" /> 
+								placeholder="mm/dd/yyyy" /> 
 						 <c:if test="${DOBIsEmpty != null}">
                           <p class="help is-danger">Required</p>
+                        </c:if>
+                         <c:if test="${DOBWrongFormat != null}">
+                          <p class="help is-danger">Invalid date</p>
                         </c:if>
 					</div>
 				</div> 
