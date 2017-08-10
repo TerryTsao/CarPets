@@ -2,6 +2,9 @@ package org.terrytsao.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -26,10 +29,20 @@ public class LoginController {
 	}
 
 	@RequestMapping("/homepage")
-	public ModelAndView home(@ModelAttribute("userName") String name) {
+	public ModelAndView home(@ModelAttribute("uid") int uid,
+			@ModelAttribute(value = "secret") String hashedSecret,
+			HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView("homepage");
 
-		mv.addObject("userName", name);
+		if (!PasswordTool.checkpw("secret", hashedSecret)) {
+			// Sth fishy happened
+			// TODO
+			return new ModelAndView("index");
+		}
+
+		setUidCookie(response, uid);
+
+		mv.addObject("userName", hashedSecret);
 
 		return mv;
 	}
@@ -78,6 +91,7 @@ public class LoginController {
 			ra.addAttribute("wrongPassword", "true");
 			return "redirect:/login"; // wrong password
 		}
+		setUidFlashAttribute(ra, user);
 		return "redirect:/homepage";
 	}
 
@@ -142,6 +156,7 @@ public class LoginController {
 		userService.add(user);
 
 		ra.addFlashAttribute("userName", userName);
+		setUidFlashAttribute(ra, user);
 		return "redirect:/homepage";
 
 	}
@@ -151,5 +166,14 @@ public class LoginController {
 	 */
 	private boolean isUserNameDup(String userName) {
 		return userService.getUser(userName) != null;
+	}
+
+	private void setUidFlashAttribute(RedirectAttributes ra, User user) {
+		ra.addFlashAttribute("uid", user.getUid());
+		ra.addFlashAttribute("secret", PasswordTool.hashpw("secret"));
+	}
+
+	private void setUidCookie(HttpServletResponse response, int uid) {
+		response.addCookie(new Cookie("uid", "" + uid));
 	}
 }

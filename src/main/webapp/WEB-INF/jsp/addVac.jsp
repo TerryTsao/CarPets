@@ -74,6 +74,7 @@
 			     <form:checkboxes items="${vacList}" path="vacs" delimiter="<br />" />
 		     </div>
 		     
+			<input type="hidden" name="uid" value="${uid}" />
 		</form:form>
 	</div>
 </body>

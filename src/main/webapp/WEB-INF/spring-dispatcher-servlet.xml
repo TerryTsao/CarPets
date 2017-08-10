@@ -56,4 +56,14 @@
     </bean>
     
     <tx:annotation-driven transaction-manager="transactionManager" />
+    
+    <!-- Interceptors -->
+    <mvc:interceptors>
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+		<mvc:interceptor>
+			<!-- intercept multiple urls -->
+			<mvc:mapping path="/user/**"/>
+			<bean class="org.terrytsao.controller.UserIdInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>

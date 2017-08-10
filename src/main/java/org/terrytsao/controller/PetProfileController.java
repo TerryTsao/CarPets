@@ -85,6 +85,13 @@ public class PetProfileController {
 		pet.setUser(userService.getUser("maomao")); // TODO
 		
 		petService.add(pet);
-		return "redirect:/homepage";
+		return "redirect:/user/homepage";
+	}
+
+	@RequestMapping("/user/addPetProcesss")
+	public ModelAndView sdakf(@RequestParam("uid") String uid) {
+		ModelAndView mv = new ModelAndView("homepage");
+		mv.addObject("userName", uid);
+		return mv;
 	}
 }

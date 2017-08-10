@@ -16,7 +16,7 @@
 
 		<div id="login" class="box">
 			<h3 class="title is-3">Add a pet</h3>
-			<form method="post" action="addPetProcess">
+			<form method="post" action="addPetProcesss">
 				<div class="field is-grouped">
 				<div class="field">
 					<label class="label">Pet Name</label>
@@ -129,6 +129,7 @@
                   </div>
                 </div>
 				
+				<input type="hidden" name="uid" value="${uid}" />
 			</form>
 		</div>
 </body>
