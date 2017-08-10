@@ -67,6 +67,9 @@
              
              
              <label class="label">Vaccination</label>
+			<c:if test="${vacsIsEmpty != null }">
+			  <p class="help is-danger">Required</p>
+			</c:if>
 			 <div class="field">
 			     <form:checkboxes items="${vacList}" path="vacs" delimiter="<br />" />
 		     </div>

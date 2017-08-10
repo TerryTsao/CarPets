@@ -1,7 +1,6 @@
 package org.terrytsao.model;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Vaccination {
+public class PetVaccinationRecord {
 	@Id
 	@GeneratedValue
 	private int vid;
@@ -23,8 +22,8 @@ public class Vaccination {
 	@Column
 	private double weight;
 	private String vet;
-	private Set<Integer> dogvacs;
-	private Set<Integer> catvacs;
+	private int[] vacs;
+
 	public Pet getPet() {
 		return pet;
 	}
@@ -49,16 +48,17 @@ public class Vaccination {
 	public void setVet(String vet) {
 		this.vet = vet;
 	}
-	public Set<Integer> getDogvacs() {
-		return dogvacs;
+	public int[] getVacs() {
+		return vacs;
 	}
-	public void setDogvacs(Set<Integer> dogvacs) {
-		this.dogvacs = dogvacs;
+	public void setVacs(int[] vacs) {
+		this.vacs = vacs;
 	}
-	public Set<Integer> getCatvacs() {
-		return catvacs;
+	public int getVid() {
+		return vid;
 	}
-	public void setCatvacs(Set<Integer> catvacs) {
-		this.catvacs = catvacs;
+	public void setVid(int vid) {
+		this.vid = vid;
 	}
+
 }

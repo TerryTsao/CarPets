@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,6 +29,7 @@ public class Pet implements Serializable {
 
 	private String ownerName;
 
+	@Enumerated
 	@Column(nullable = false)
 	private Species species;
 
@@ -35,6 +37,7 @@ public class Pet implements Serializable {
 	private Date DOB;
 
 	@Column(nullable = false)
+	@Enumerated
 	private petGender gender;
 
 	@Column
@@ -98,7 +101,7 @@ public class Pet implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public byte[] getImage() {
+	public byte[] getImage() {//image upload
 		return image;
 	}
 	public void setImage(byte[] image) {

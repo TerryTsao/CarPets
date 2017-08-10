@@ -16,8 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.terrytsao.model.CatVac;
 import org.terrytsao.model.DogVac;
 import org.terrytsao.model.Pet;
+import org.terrytsao.model.PetVaccinationRecord;
 import org.terrytsao.model.VacArr;
-import org.terrytsao.model.Vaccination;
 import org.terrytsao.service.MyService;
 import org.terrytsao.tool.DateTool;
 import org.terrytsao.tool.EnumTool;
@@ -39,7 +39,7 @@ public class AddVacController {
 			mv.addObject(key, val);
 		}
 		// TODO
-		Pet pet = myService.getById(Pet.class, 11);
+		Pet pet = myService.getById(Pet.class, 22);
 		mv.addObject("petType", pet.getSpecies().toString());
 
 		switch (pet.getSpecies()) {
@@ -60,13 +60,19 @@ public class AddVacController {
 	public String processAddVacForm(
 			@ModelAttribute("vac") VacArr vacArr,
 			@RequestParam Map<String, String> params, RedirectAttributes ra) {
-		Pet pet = myService.getById(Pet.class, 11);
+		Pet pet = myService.getById(Pet.class, 22);
 		String date = params.get("vacDate");
 		String weight = params.get("weight");
 		String vet = params.get("vet");
+		String[] vacs = vacArr.getVacs();
 
 		if (0 == date.length()) {
 			ra.addAttribute("dateIsEmpty", "true");
+			return "redirect:/user/addVac";
+		}
+
+		if (0 == vacs.length) {
+			ra.addAttribute("vacsIsEmpty", "true");
 			return "redirect:/user/addVac";
 		}
 
@@ -76,10 +82,11 @@ public class AddVacController {
 			return "redirect:/user/addVac";
 		}
 
-		Vaccination vaccination = new Vaccination();
+		PetVaccinationRecord vaccination = new PetVaccinationRecord();
 		vaccination.setVacDate(d);
 		vaccination.setWeight(Double.parseDouble(weight));
 		vaccination.setVet(vet);
+		vaccination.setVacs(EnumTool.getEnumInt(pet.getSpecies(), vacs));
 		// vaccination.setDogVacs(DogVac.valueOf(dogvac.toUpperCase()));
 		// vaccination.setCatvacs(CatVac.valueOf(catvac.toUpperCase()));
 		vaccination.setPet(pet); // TODO
