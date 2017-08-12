@@ -1,5 +1,7 @@
 package org.terrytsao.controller;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,15 +10,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.terrytsao.model.Pet;
 import org.terrytsao.model.User;
-import org.terrytsao.service.MyService;
+import org.terrytsao.service.UserService;
 
 @Controller
 @RequestMapping("/user")
 public class UserDashBoardController {
 
 	@Autowired
-	private MyService myService;
+	private UserService userService;
 
 	private User user;
 
@@ -24,6 +27,8 @@ public class UserDashBoardController {
 	public ModelAndView dashBoard() {
 		ModelAndView mv = new ModelAndView("dashboard");
 
+		Set<Pet> myPets = userService.getPetsById(user.getUid());
+		mv.addObject("myPets", myPets);
 		return mv;
 	}
 
@@ -34,7 +39,7 @@ public class UserDashBoardController {
 		model.addAttribute("uid", uidStr);
 
 		if (null == user || user.getUid() != uid) {
-			user = myService.getById(User.class, uid);
+			user = userService.getById(User.class, uid);
 		}
 	}
 }

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,22 +29,21 @@ public class LoginController {
 	}
 
 	@RequestMapping("/homepage")
-	public ModelAndView home(@ModelAttribute("uid") int uid,
-			@ModelAttribute(value = "secret") String hashedSecret,
-			HttpServletResponse response) {
-		ModelAndView mv = new ModelAndView("homepage");
+	public String home(HttpServletResponse response, Model model) {
+		Map<String, ?> map = model.asMap();
+		int uid = (Integer) map.get("uid");
+		String hashedSecret = (String) map.get("secret");
+		model.addAttribute("secret", null);
 
 		if (!PasswordTool.checkpw("secret", hashedSecret)) {
 			// Sth fishy happened
 			// TODO
-			return new ModelAndView("index");
+			return "index";
 		}
 
 		setUidCookie(response, uid);
 
-		mv.addObject("userName", hashedSecret);
-
-		return mv;
+		return "redirect:/user/homepage";
 	}
 
 	@RequestMapping("/login")
@@ -174,6 +173,8 @@ public class LoginController {
 	}
 
 	private void setUidCookie(HttpServletResponse response, int uid) {
-		response.addCookie(new Cookie("uid", "" + uid));
+		Cookie cookie = new Cookie("uid", "" + uid);
+		cookie.setMaxAge(3600);
+		response.addCookie(cookie);
 	}
 }

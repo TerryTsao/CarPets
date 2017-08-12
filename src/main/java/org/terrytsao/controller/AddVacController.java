@@ -47,7 +47,6 @@ public class AddVacController {
 		}
 
 		// TODO
-		Pet pet = myService.getById(Pet.class, 22);
 		model.addAttribute("petType", pet.getSpecies().toString());
 
 		switch (pet.getSpecies()) {

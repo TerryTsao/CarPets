@@ -1,17 +1,21 @@
 package org.terrytsao.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User implements Serializable {
 
-    private static final long serialVersionUID = 1;
+	private static final long serialVersionUID = 4;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,6 +26,17 @@ public class User implements Serializable {
 
     @Column
 	private String password;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private Set<Pet> myPets = new HashSet<>(0);
+
+	public Set<Pet> getMyPets() {
+		return myPets;
+	}
+
+	public void setMyPets(Set<Pet> myPets) {
+		this.myPets = myPets;
+	}
 
 	public String getUserName() {
 		return userName;
