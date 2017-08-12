@@ -16,7 +16,7 @@
 
 		<div id="login" class="box">
 			<h3 class="title is-3">Add a pet</h3>
-			<form method="post" action="addPetProcesss">
+			<form method="post" action="addPetProcess">
 				<div class="field is-grouped">
 				<div class="field">
 					<label class="label">Pet Name</label>

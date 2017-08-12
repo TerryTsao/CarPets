@@ -1,5 +1,5 @@
 package org.terrytsao.model;
 
-public enum petGender {
+public enum PetGender {
 	FEMALE, MALE, SPAYED, NEUTERED
 }

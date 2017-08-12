@@ -19,7 +19,6 @@ public class UserIdInterceptor extends HandlerInterceptorAdapter {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equals("uid")) {
 					uid = cookie.getValue();
-					request.setAttribute("uid", uid);
 					break;
 				}
 			}
@@ -30,6 +29,8 @@ public class UserIdInterceptor extends HandlerInterceptorAdapter {
 		}
 
 		// uid found
+
+		request.setAttribute("uid", uid);
 		return true;
 	}
 

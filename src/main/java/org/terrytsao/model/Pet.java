@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Pet implements Serializable {
 
-    private static final long serialVersionUID = 1;
+	private static final long serialVersionUID = 2;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,12 +38,12 @@ public class Pet implements Serializable {
 
 	@Column(nullable = false)
 	@Enumerated
-	private petGender gender;
+	private PetGender gender;
 
 	@Column
 	private String microchipNO;
 	private String breed;
-	private byte[] image;
+
 	public int getPid() {
 		return pid;
 	}
@@ -80,10 +80,10 @@ public class Pet implements Serializable {
 	public void setDOB(Date dOB) {
 		DOB = dOB;
 	}
-	public petGender getGender() {
+	public PetGender getGender() {
 		return gender;
 	}
-	public void setGender(petGender gender) {
+	public void setGender(PetGender gender) {
 		this.gender = gender;
 	}
 	public String getMicrochipNO() {
@@ -101,11 +101,4 @@ public class Pet implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public byte[] getImage() {//image upload
-		return image;
-	}
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
-
 }

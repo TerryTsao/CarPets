@@ -38,10 +38,13 @@
 				</div> 
 
 				<div class="field">
-                    <label class="label">Weight</label>
+                    <label class="label">Weight/lb</label>
                     <div class="control">
                         <input class="input" name="weight" value="${weight}"
-                                placeholder="Weight" /> 
+                                placeholder="Weight in lbs" /> 
+						<c:if test="${weightWrongFormat != null }">
+						  <p class="help is-danger">Weight is not a valid number</p>
+						</c:if>
                     </div>
                 </div> 
                 
